@@ -1,0 +1,1 @@
+echo "$1" | sudo -S nmap -sn $2 | awk '/Nmap done:/ {print $6}'
