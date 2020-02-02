@@ -29,10 +29,12 @@ ip = sys.argv[1]
 
 # Number of probes per hour
 nopph = int(sys.argv[2])
+if nopph < 1 or nopph > 360:
+    print('Number of probes per hour must be >= 1 and <= 360')
+    exit(1)
 
-
-# Time interval between successive probes
-tibsp = 60 // nopph
+# Time interval(in seconds) between successive probes
+tibsp = 3600 // nopph
 
 if os.path.isfile('data.csv'):
     df = pd.read_csv('data.csv')
@@ -41,20 +43,20 @@ else:
     df = pd.DataFrame(columns=['Time of the day', 'Number of hosts up'])
     i = 0
 
-last_minute = -1
+last_second = -1
 
 try:
     while(True):
         now = datetime.now()
-        curr_minute = now.minute
-        if curr_minute != last_minute and curr_minute % tibsp == 0:
+        curr_second = now.minute * 60 + now.second
+        if curr_second != last_second and curr_second % tibsp == 0:
             # Number of hosts up
             nohu = run(ip)
             now = now.replace(microsecond=0)
             df.loc[i] = [now, nohu]
             print([str(now), nohu])
             i += 1
-            last_minute = curr_minute
+            last_second = curr_second
         time.sleep(1)
 except:
     print(traceback.format_exc())
