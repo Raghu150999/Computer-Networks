@@ -57,7 +57,7 @@ try:
             print([str(now), nohu])
             i += 1
             last_second = curr_second
-        time.sleep(1)
+        time.sleep(0.5)
 except:
     print(traceback.format_exc())
     df.to_csv('data.csv', index=False)

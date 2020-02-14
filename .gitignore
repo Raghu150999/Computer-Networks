@@ -3,4 +3,6 @@ test_subprocess.py
 topo1.pdf
 notes.txt
 __pycache__
-data.csv
+*.csv
+*.pdf
+zenmap
