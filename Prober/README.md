@@ -1,5 +1,5 @@
-# Computer-Networks
-Computer Networks course assignments
+# Prober
+Script to detect online hosts in a local network for a given IP subnet.
 
 ### Requirements
 1. nmap (Network Manager): `sudo apt install nmap`
